@@ -1,4 +1,8 @@
 # BuildAPIWithPostgreSQL
 RESTful API with Node.js, Express, and PostgreSQL
 
-Run by "npm start".
+Use Postman to send the request.
+
+Start server:
+```npm start
+```
