@@ -1,10 +1,10 @@
-const accountModel = require("../Models/accountModel");
+const accountModel = require("../models/account.model");
 
 class middleWares {
     checkId = (req, res, next) => {
-        let Id = req.params.Id;
+        let id = req.params.id;
         accountModel
-            .query('SELECT * FROM public.users WHERE "Id" = $1', [Id])
+            .query('SELECT * FROM public.users WHERE "id" = $1', [id])
             .then((data) => {
                 next();
             })

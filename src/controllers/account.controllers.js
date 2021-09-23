@@ -1,4 +1,4 @@
-const accountModel = require("../Models/accountModel");
+const accountModel = require("../models/account.model");
 
 class AccountController {
     /**
@@ -21,12 +21,12 @@ class AccountController {
      * [GET] localhost:3000/account/:id
      */
     getUserById = (req, res) => {
-        const Id = req.params["Id"];
+        const id = req.params.id;
 
         accountModel
             .query(
                 'SELECT "Id", address, first_name, last_name, phone, email FROM public.users WHERE users."Id" = $1  ',
-                [Id]
+                [id]
             )
             .then((data) => {
                 res.json(data.rows);
@@ -63,7 +63,7 @@ class AccountController {
      * [PUT] localhost:3000/account/:id
      */
     updateUser = (req, res) => {
-        const Id = req.params.Id;
+        const id = req.params.id;
         const first_name = req.body.first_name;
         const last_name = req.body.last_name;
         const email = req.body.email;
