@@ -2,13 +2,11 @@ const accountModel = require("../models/account.model");
 
 class AccountController {
     /**
-     * [GET] localhost:3000/account/
+     * [GET] localhost:3000/accounts/
      */
     getUsers = (req, res) => {
         accountModel
-            .query(
-                'SELECT "Id", address, first_name, last_name, phone, email FROM public.users'
-            )
+            .getUsers(req, res)
             .then((data) => {
                 res.json(data.rows);
             })
@@ -18,16 +16,11 @@ class AccountController {
     };
 
     /**
-     * [GET] localhost:3000/account/:id
+     * [GET] localhost:3000/accounts/:id
      */
     getUserById = (req, res) => {
-        const id = req.params.id;
-
         accountModel
-            .query(
-                'SELECT "Id", address, first_name, last_name, phone, email FROM public.users WHERE users."Id" = $1  ',
-                [id]
-            )
+            .getUserById(req, res)
             .then((data) => {
                 res.json(data.rows);
             })
@@ -37,20 +30,11 @@ class AccountController {
     };
 
     /**
-     * [POST] localhost:3000/account/register
+     * [POST] localhost:3000/accounts/register
      */
     createUser = (req, res) => {
-        const first_name = req.body.first_name;
-        const last_name = req.body.last_name;
-        const email = req.body.email;
-        const phone = req.body.phone;
-        const address = req.body.address;
-
         accountModel
-            .query(
-                "INSERT INTO public.users(address, first_name, last_name, phone, email) VALUES ($1, $2, $3, $4, $5)",
-                [address, first_name, last_name, phone, email]
-            )
+            .createUser(req, res)
             .then((data) => {
                 res.json("Create user successfully!!!");
             })
@@ -60,21 +44,11 @@ class AccountController {
     };
 
     /**
-     * [PUT] localhost:3000/account/:id
+     * [PUT] localhost:3000/accounts/:id
      */
     updateUser = (req, res) => {
-        const id = req.params.id;
-        const first_name = req.body.first_name;
-        const last_name = req.body.last_name;
-        const email = req.body.email;
-        const phone = req.body.phone;
-        const address = req.body.address;
-
         accountModel
-            .query(
-                'UPDATE public.users SET first_name = $1, last_name = $2, email = $3, phone = $4, address = $5 WHERE users."Id" = $6',
-                [first_name, last_name, email, phone, address, Id]
-            )
+            .updateUser(req, res)
             .then((data) => {
                 res.json("Update User successfully!!!");
             })
@@ -84,13 +58,11 @@ class AccountController {
     };
 
     /**
-     * [DELETE] localhost:3000/account/:id
+     * [DELETE] localhost:3000/accounts/:id
      */
     deleteUser = (req, res) => {
-        const Id = req.params.Id;
-
         accountModel
-            .query('DELETE FROM public.users WHERE "Id" = $1', [Id])
+            .deleteUser(req, res)
             .then((data) => {
                 res.json("Delete user successfully!!!");
             })

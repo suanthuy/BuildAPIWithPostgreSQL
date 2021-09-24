@@ -4,12 +4,12 @@ class middleWares {
     checkId = (req, res, next) => {
         let id = req.params.id;
         accountModel
-            .query('SELECT * FROM public.users WHERE "id" = $1', [id])
+            .getUserById(req, res)
             .then((data) => {
                 next();
             })
             .catch((err) => {
-                res.status(500).json("UserId does not exist");
+                res.status(500).json("User id does not exist");
             });
     };
 }
