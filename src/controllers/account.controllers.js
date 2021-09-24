@@ -8,9 +8,10 @@ class AccountController {
         accountModel
             .getUsers(req, res)
             .then((data) => {
-                res.json(data.rows);
+                res.status(200).json(data.rows);
             })
             .catch((err) => {
+                console.error(err);
                 res.status(500).json("Server Error");
             });
     };
@@ -22,10 +23,11 @@ class AccountController {
         accountModel
             .getUserById(req, res)
             .then((data) => {
-                res.json(data.rows);
+                res.status(200).json(data.rows);
             })
             .catch((err) => {
-                res.status(500).json("Server Error");
+                console.error(err);
+                res.status(500).json({ message: "Server Error" });
             });
     };
 
@@ -36,10 +38,11 @@ class AccountController {
         accountModel
             .createUser(req, res)
             .then((data) => {
-                res.json("Create user successfully!!!");
+                res.status(201).json("Create user successfully!!!");
             })
             .catch((err) => {
-                res.status(500).json("Server Error");
+                console.error(err);
+                res.status(500).json({ message: "Server Error" });
             });
     };
 
@@ -50,10 +53,11 @@ class AccountController {
         accountModel
             .updateUser(req, res)
             .then((data) => {
-                res.json("Update User successfully!!!");
+                res.status(201).json("Update User successfully!!!");
             })
             .catch((err) => {
-                res.status(500).json("Server Error");
+                console.error(err);
+                res.status(500).json({ message: "Server Error" });
             });
     };
 
@@ -67,7 +71,8 @@ class AccountController {
                 res.json("Delete user successfully!!!");
             })
             .catch((err) => {
-                res.status(500).json("Server Error");
+                console.error(err);
+                res.status(500).json({ message: "Server Error" });
             });
     };
 }

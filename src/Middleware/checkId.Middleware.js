@@ -9,7 +9,8 @@ class middleWares {
                 next();
             })
             .catch((err) => {
-                res.status(500).json("User id does not exist");
+                console.error(err);
+                res.status(404).json("User is not found");
             });
     };
 }
