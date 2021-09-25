@@ -14,7 +14,7 @@ class AccountModel {
      */
     getUsers = async (req, res) => {
         const response = await pool.query(
-            'SELECT "id", address, first_name, last_name, phone, email FROM public.users'
+            'SELECT "id", address, first_name, last_name, phone, email FROM public.users RETURNING *'
         );
         return response;
     };
@@ -26,7 +26,7 @@ class AccountModel {
         let { id } = req.params;
 
         const response = await pool.query(
-            'SELECT "id", address, first_name, last_name, phone, email FROM public.users WHERE users."id" = $1  ',
+            'SELECT "id", address, first_name, last_name, phone, email FROM public.users WHERE users."id" = $1  RETURNING *',
             [id]
         );
         return response;
@@ -39,7 +39,7 @@ class AccountModel {
         let { address, first_name, last_name, phone, email } = req.body;
 
         const response = await pool.query(
-            "INSERT INTO public.users(address, first_name, last_name, phone, email) VALUES ($1, $2, $3, $4, $5)",
+            "INSERT INTO public.users(address, first_name, last_name, phone, email) VALUES ($1, $2, $3, $4, $5) RETURNING *",
             [address, first_name, last_name, phone, email]
         );
         return response;
@@ -53,7 +53,7 @@ class AccountModel {
         let { first_name, last_name, email, phone, address } = req.body;
 
         const response = await pool.query(
-            'UPDATE public.users SET first_name = $1, last_name = $2, email = $3, phone = $4, address = $5 WHERE users."id" = $6',
+            'UPDATE public.users SET first_name = $1, last_name = $2, email = $3, phone = $4, address = $5 WHERE users."id" = $6 RETURNING *',
             [first_name, last_name, email, phone, address, id]
         );
         return response;
@@ -66,7 +66,7 @@ class AccountModel {
         let { id } = req.params;
 
         const response = await pool.query(
-            'DELETE FROM public.users WHERE "id" = $1',
+            'DELETE FROM public.users WHERE "id" = $1 RETURNING *',
             [id]
         );
         return response;

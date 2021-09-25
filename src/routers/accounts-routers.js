@@ -1,11 +1,11 @@
-const accountController = require("../controllers/account.controllers");
+const accountController = require("../controllers/account-controllers");
 const express = require("express");
-const middleWares = require("../middleware/checkId.middleware");
+const middleWares = require("../middleware/authentication-middleware");
 const router = express.Router();
 
 router.get("/:id", middleWares.checkId, accountController.getUserById);
 
-router.post("/register", accountController.createUser);
+router.post("/register", middleWares.createUser);
 
 router.put("/:id", middleWares.checkId, accountController.updateUser);
 

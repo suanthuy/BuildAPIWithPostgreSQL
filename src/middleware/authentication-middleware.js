@@ -1,4 +1,4 @@
-const accountModel = require("../models/account.model");
+const accountModel = require("../models/account-model");
 
 class middleWares {
     checkId = (req, res, next) => {

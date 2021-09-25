@@ -1,4 +1,4 @@
-const accountModel = require("../models/account.model");
+const accountModel = require("../models/account-model");
 
 class AccountController {
     /**
@@ -38,7 +38,7 @@ class AccountController {
         accountModel
             .createUser(req, res)
             .then((data) => {
-                res.status(201).json("Create user successfully!!!");
+                res.status(201).json("Create user successfully!!!" + data.rows);
             })
             .catch((err) => {
                 console.error(err);
@@ -53,7 +53,7 @@ class AccountController {
         accountModel
             .updateUser(req, res)
             .then((data) => {
-                res.status(201).json("Update User successfully!!!");
+                res.status(201).json("Update User successfully!!!" + data.rows);
             })
             .catch((err) => {
                 console.error(err);
@@ -68,7 +68,7 @@ class AccountController {
         accountModel
             .deleteUser(req, res)
             .then((data) => {
-                res.json("Delete user successfully!!!");
+                res.json("Delete user successfully!!!" + data.rows);
             })
             .catch((err) => {
                 console.error(err);
