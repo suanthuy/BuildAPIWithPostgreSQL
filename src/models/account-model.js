@@ -14,7 +14,7 @@ class AccountModel {
      */
     getUsers = async (req, res) => {
         const response = await pool.query(
-            'SELECT "id", address, first_name, last_name, phone, email FROM public.users RETURNING *'
+            'SELECT "id", address, first_name, last_name, phone, email FROM public.users '
         );
         return response;
     };
@@ -26,7 +26,7 @@ class AccountModel {
         let { id } = req.params;
 
         const response = await pool.query(
-            'SELECT "id", address, first_name, last_name, phone, email FROM public.users WHERE users."id" = $1  RETURNING *',
+            'SELECT "id", address, first_name, last_name, phone, email FROM public.users WHERE users."id" = $1 ',
             [id]
         );
         return response;

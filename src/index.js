@@ -1,9 +1,9 @@
 require("dotenv").config();
 
 const express = require("express");
-const accountModel = require("./models/account.model");
-const router = require("./routers/index.routers");
-const db = require("./Databases/index");
+const accountModel = require("./models/account-model");
+const router = require("./routers/Routers");
+const db = require("./Databases/Database");
 
 const app = express();
 const port = 3000;

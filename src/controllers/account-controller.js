@@ -1,3 +1,4 @@
+const httpStatus = require("http-status");
 const accountModel = require("../models/account-model");
 
 class AccountController {
@@ -8,11 +9,13 @@ class AccountController {
         accountModel
             .getUsers(req, res)
             .then((data) => {
-                res.status(200).json(data.rows);
+                res.status(httpStatus.OK).json(data.rows);
             })
             .catch((err) => {
-                console.error(err);
-                res.status(500).json("Server Error");
+                res.status(httpStatus.BAD_REQUEST).json({
+                    message: "Bad request",
+                    err,
+                });
             });
     };
 
@@ -23,11 +26,13 @@ class AccountController {
         accountModel
             .getUserById(req, res)
             .then((data) => {
-                res.status(200).json(data.rows);
+                res.status(httpStatus.OK).json(data.rows);
             })
             .catch((err) => {
-                console.error(err);
-                res.status(500).json({ message: "Server Error" });
+                res.status(httpStatus.BAD_REQUEST).json({
+                    message: "Bad request",
+                    err,
+                });
             });
     };
 
@@ -38,11 +43,15 @@ class AccountController {
         accountModel
             .createUser(req, res)
             .then((data) => {
-                res.status(201).json("Create user successfully!!!" + data.rows);
+                res.status(httpStatus.CREATED).json(
+                    "Create user successfully!!!"
+                );
             })
             .catch((err) => {
-                console.error(err);
-                res.status(500).json({ message: "Server Error" });
+                res.status(httpStatus.BAD_REQUEST).json({
+                    message: "Bad request",
+                    err,
+                });
             });
     };
 
@@ -53,11 +62,13 @@ class AccountController {
         accountModel
             .updateUser(req, res)
             .then((data) => {
-                res.status(201).json("Update User successfully!!!" + data.rows);
+                res.status(httpStatus.OK).json("Update User successfully!!!");
             })
             .catch((err) => {
-                console.error(err);
-                res.status(500).json({ message: "Server Error" });
+                res.status(httpStatus.BAD_REQUEST).json({
+                    message: "Bad request",
+                    err,
+                });
             });
     };
 
@@ -68,11 +79,13 @@ class AccountController {
         accountModel
             .deleteUser(req, res)
             .then((data) => {
-                res.json("Delete user successfully!!!" + data.rows);
+                res.status(httpStatus.OK).json("Delete user successfully!!!");
             })
             .catch((err) => {
-                console.error(err);
-                res.status(500).json({ message: "Server Error" });
+                res.status(httpStatus.BAD_REQUEST).json({
+                    message: "Bad request",
+                    err,
+                });
             });
     };
 }
