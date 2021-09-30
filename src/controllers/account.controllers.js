@@ -1,5 +1,5 @@
 const httpStatus = require("http-status");
-const accountModel = require("../models/account-model");
+const accountModel = require("../models/account.model");
 
 class AccountController {
     /**

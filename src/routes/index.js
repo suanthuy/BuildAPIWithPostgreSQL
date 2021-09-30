@@ -1,4 +1,4 @@
-const accountsRouter = require("./account-router");
+const accountsRouter = require("./account.route");
 
 function router(app) {
     app.use("/accounts", accountsRouter);

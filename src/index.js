@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
-const accountModel = require("./models/account-model");
-const router = require("./routers/Routers");
+const accountModel = require("./models/account.model");
+const router = require("./routes/index");
 const db = require("./Databases/Database");
 
 const app = express();
